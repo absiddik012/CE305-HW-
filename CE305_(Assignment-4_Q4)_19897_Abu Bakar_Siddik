@@ -1,0 +1,23 @@
+ORG 100
+
+// Input values for m and n
+m,      DEC 4
+n,      DEC 3
+
+// Initialize product and counter
+product, DEC 0
+counter, DEC 0
+
+LOOP,   LOAD counter    // Load the value of counter into the accumulator
+        SUBT m          // Subtract m from the accumulator
+        SKIPCOND 800    // Skip if the result is zero (if counter == m)
+        JUMP CONTINUE   // Jump to CONTINUE if the result is not zero
+        JUMP ENDLOOP    // Jump to ENDLOOP if the result is zero
+
+CONTINUE, ADD product    // Add the current value of product to the accumulator
+        STORE product   // Store the result back in product
+        JUMP LOOP       // Jump back to LOOP
+
+ENDLOOP,HALT
+
+END
