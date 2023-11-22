@@ -1,0 +1,14 @@
+ORG 100         / Start address of the program
+
+INIT, LOAD 0    / Initialize counter (i) to 0
+STORE I         / Store counter in I
+LOOP, LOAD I    / Load the counter into the AC
+SUBT THREE      / Check if i == 3
+SKIPCOND 400    / Skip next instruction if AC < 0 (i.e., if i == 3)
+JUMP ENDLOOP    / Jump to the end of the loop if i == 3
+OUTPUT          / Output the value of i
+JUMP LOOP       / Jump back to the beginning of the loop
+ENDLOOP, HALT   / End of the program
+
+I, DEC 0         / Variable to hold the value of i
+THREE, DEC 3     / Constant for comparison
