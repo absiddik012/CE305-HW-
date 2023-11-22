@@ -1,0 +1,19 @@
+ORG 100          / Start address of the program
+
+LOAD H_ASCII    / Load ASCII value of 'H' into AC
+OUTPUT          / Output the content of the AC
+LOAD E_ASCII    / Load ASCII value of 'e' into AC
+OUTPUT
+LOAD L_ASCII    / Load ASCII value of 'l' into AC
+OUTPUT
+OUTPUT          / Output twice for two 'l' characters
+LOAD O_ASCII    / Load ASCII value of 'o' into AC
+OUTPUT
+
+HALT             / Halt the program
+H_ASCII, DEC 72  / ASCII value of 'H'
+E_ASCII, DEC 101 / ASCII value of 'e'
+L_ASCII, DEC 108 / ASCII value of 'l'
+O_ASCII, DEC 111 / ASCII value of 'o'
+
+END             / End of the program
