@@ -1,17 +1,28 @@
 ORG 100
-
-LOOP,    LOAD COUNT   // Load the value of COUNT into the accumulator
-         SUBT ONE     // Subtract 1
-         SKIPCOND 400 // Skip if the result is zero (if COUNT == 1)
-         JUMP CONT    // Jump to CONT if the result is not zero
-         JUMP LOOP    // Jump back to LOOP if the result is zero
-
-CONT,    STORE RESULT // Store the value of COUNT in RESULT
-         ADD ONE      // Add 1 to the accumulator
-         JUMP LOOP    // Jump back to LOOP
-
-ONE,     DEC 1
-COUNT,   DEC 5
-RESULT,  DEC 0
-
-END
+Load x
+Store x
+Loop, Load x
+ Subt f
+ Skipcond 000
+ Jump ENDLOOP
+ Load x
+ Subt t
+ Skipcond 400
+ Jump Loop1
+ Jump Continue
+ Output
+Loop1, Load x
+ Output
+ Add o
+ Store x
+ Jump Loop
+ENDLOOP, Halt
+Continue, Load x
+ Add o
+ Store x
+ Jump Loop
+x, Dec 0
+t, Dec 3
+o, Dec 1
+f, DEC 5
+END 100
