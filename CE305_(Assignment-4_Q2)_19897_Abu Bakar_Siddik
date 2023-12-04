@@ -1,14 +1,25 @@
-ORG 100         / Start address of the program
+ORG 100
+Load x
+store x
+Loop, Load x
+Subt f
+Skipcond 000
+Jump ENDLOOP
+Load x
+Subt t
+Skipcond 400
+Jump Loop1
+Jump ENDLOOP
+Loop1, Load x
+Output
+Add one
+store x
+Jump Loop
 
-INIT, LOAD 0    / Initialize counter (i) to 0
-STORE I         / Store counter in I
-LOOP, LOAD I    / Load the counter into the AC
-SUBT THREE      / Check if i == 3
-SKIPCOND 400    / Skip next instruction if AC < 0 (i.e., if i == 3)
-JUMP ENDLOOP    / Jump to the end of the loop if i == 3
-OUTPUT          / Output the value of i
-JUMP LOOP       / Jump back to the beginning of the loop
-ENDLOOP, HALT   / End of the program
+ENDLOOP, Halt
 
-I, DEC 0         / Variable to hold the value of i
-THREE, DEC 3     / Constant for comparison
+x, DEC 0
+t, DEC 3
+one, DEC 1
+f, DEC 5
+END 100
