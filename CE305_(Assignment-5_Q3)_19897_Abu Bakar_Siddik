@@ -1,0 +1,40 @@
+def update_memory(storage, block_data):
+    storage.update(block_data)
+    return storage
+
+def map_to_fully_associative_cache(cache, main_memory, address):
+    tag, word = address[:11], address[11:]
+
+    for block in cache.values():
+        if block[0] == tag and block[2] == 1:
+            return cache
+
+    for block_label, block_content in cache.items():
+        if block_content[2] == 0:
+            cache[block_label] = [tag, main_memory[address], 1]
+            return cache
+
+    first_block_label = list(cache.keys())[0]
+    cache[first_block_label] = [tag, main_memory[address], 1]
+
+    return cache
+
+initial_memory = {}
+main_memory = update_memory(initial_memory, {"00000110101000": [0, 1, 2, 3, 4, 5, 6, 7]})
+main_memory = update_memory(main_memory, {"00001110101000": [10, 11, 12, 13, 14, 15, 16, 17]})
+main_memory = update_memory(main_memory, {"00011110101000": [20, 21, 22, 23, 24, 25, 26, 27]})
+main_memory = update_memory(main_memory, {"00111110101000": [30, 31, 32, 33, 34, 35, 36, 37]})
+main_memory = update_memory(main_memory, {"01111110101000": [40, 41, 42, 43, 44, 45, 46, 47]})
+
+cache_blocks = {
+    "blk0": ["00000000000", [0, 0, 0, 0, 0, 0, 0, 0], 0],
+    "blk1": ["00000000000", [0, 0, 0, 0, 0, 0, 0, 0], 0],
+    "blk2": ["00000000000", [0, 0, 0, 0, 0, 0, 0, 0], 0],
+    "blk3": ["00000000000", [0, 0, 0, 0, 0, 0, 0, 0], 0]
+}
+
+addresses = ["00000110101000", "00001110101000", "00011110101000", "00111110101000", "01111110101000"]
+for addr in addresses:
+    cache_blocks = map_to_fully_associative_cache(cache_blocks, main_memory, addr)
+
+cache_blocks
