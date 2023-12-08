@@ -1,0 +1,31 @@
+def store(memory, data):
+    memory.update(data)
+    return memory
+
+def load_accumulator_immediate(value):
+    return value
+
+def load_accumulator_direct(memory, address):
+    return memory[address]
+
+def load_accumulator_indirect(memory, address):
+    indirect_address = memory[address]
+    return memory[indirect_address]
+
+def load_accumulator_indexed(memory, index_register, base_address):
+    calculated_address = base_address + index_register
+    return memory.get(calculated_address, None)
+
+initial_memory = {}
+memory = store(initial_memory, {800: 123})
+memory = store(memory, {900: 1000})
+memory = store(memory, {800: 900})
+memory = store(memory, {1500: 700})
+
+ac_imm = load_accumulator_immediate(800)
+ac_dir = load_accumulator_direct(memory, 800)
+ac_indir = load_accumulator_indirect(memory, 800)
+index_register = 700
+ac_idx = load_accumulator_indexed(memory, index_register, 800)
+
+(ac_imm, ac_dir, ac_indir, ac_idx)
